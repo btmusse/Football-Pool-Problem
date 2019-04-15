@@ -23,15 +23,15 @@ public class hillClimbingRunnable implements Runnable{
             ArrayList<Integer> b=new ArrayList<Integer>();
             b.clear();
 
-            for (int i = 0; i < 16; i++) {
-                b.add(r.nextInt(729));
+            for (int i = 0; i < 11; i++) {
+                b.add(r.nextInt(2187));
             }
             ISA isa = new ISA(b);
            // System.out.println(tnum+" "+inc);
             inc++;
             check.setBettingSystem(isa.bettingSystem);
             check.checkSystem(null);
-            if(check.numUn<14&&check.numUn>0){
+            if(check.numUn<9&&check.numUn>0){
                 System.out.println(tnum+" Less!");
                 io.writeToFile(isa, check.numUn);
             }

@@ -2,13 +2,13 @@ package HillClimbing;
 
 public class graph {
     public int[][] graph;
-    private int q;
+    private int R;
     private int numSpaces;
     private int numOutcomes;
-    public graph(int numberOut, int q, int numSpaces){
+    public graph(int numberOut, int R, int numSpaces){
         graph=new int [numberOut][numberOut];
         this.numOutcomes= numberOut;
-        this.q=q;
+        this.R=R;
         this.numSpaces=numSpaces;
         generateCoverings();
 
@@ -26,7 +26,7 @@ public class graph {
                         numDiff++;
                     }
                 }
-                if(numDiff<q+1){
+                if(numDiff<R+1){
                     graph[i][j]=1;
                 }
                 else{

@@ -5,68 +5,17 @@ import java.util.List;
 import java.util.Random;
 
 public class ISA {
-    public static void main(String[] args){
-        ArrayList<Integer> b=new ArrayList<Integer>();
-//        b.add(0);
-//        b.add(94);
-//        b.add(274);
-//        b.add(404);
-//        b.add(15);
-//        b.add(189);
-//        b.add(362);
-//        b.add(235);
-//        b.add(309);
-//        b.add(413);
-//        b.add(141);
-//        b.add(212);
-//        b.add(342);
-//        b.add(205);
-//        b.add(262);
-//        b.add(299);
-        //b.add(728);
-        Random r = new Random();
-        IOwork io = new IOwork();
-        IOwork badio= new IOwork();
-        Checker check = new Checker();
-        io.printerSetup("ISAOut.txt");
-        badio.printerSetup("ISABadOut.txt");
-        int inc=0;
-        while(true) {
-            b.clear();
-
-            for (int i = 0; i < 16; i++) {
-                b.add(r.nextInt(729));
-            }
-            ISA isa = new ISA(b);
-            System.out.println(inc);
-            inc++;
-            check.setBettingSystem(isa.bettingSystem);
-            check.checkSystem(null);
-            if(check.numUn<14&&check.numUn>0){
-                System.out.println("Less!");
-                io.writeToFile(isa, check.numUn);
-            }
-            else if(check.numUn==0) {
-                System.out.println("Solution!!!");
-                io.writeToFile(isa, check.numUn);
-                io.printerTeardown();
-                break;
-            }
-            else{
-                badio.writeToFile(isa, check.numUn);
-            }
-        }
-    }
-    private int numOut=729;
-    private int q=2;
-    private int n=6;
+    private int numOut=2187;
+    private int q=3;
+    private int R=3;
+    private int n=7;
     public graph g;
     private ArrayList<Integer> possibleNext= new ArrayList<Integer>();
     public ArrayList<Integer> bettingSystem;
     private boolean[] visited= new boolean[numOut];
 
     public ISA(ArrayList<Integer> bettingSystem){
-        g=new graph(numOut,q,n );
+        g=new graph(numOut,R,n );
         setBettingSystem(bettingSystem);
         hillClimbing();
     }
@@ -110,7 +59,7 @@ public class ISA {
             removedBet=erase(bettingSystem, i, visited);
             temp=removedBet;
             calcBestNext(visited);
-            for(int j=0; j<729; j++){
+            for(int j=0; j<numOut; j++){
                 int bet=j;
                 addNewBet(bettingSystem,bet, visited);
                 tempint=calcNumCovered(visited);
@@ -196,5 +145,58 @@ public class ISA {
             }
         }
         return temp;
+    }
+
+    public static void main(String[] args){
+        ArrayList<Integer> b=new ArrayList<Integer>();
+//        b.add(0);
+//        b.add(94);
+//        b.add(274);
+//        b.add(404);
+//        b.add(15);
+//        b.add(189);
+//        b.add(362);
+//        b.add(235);
+//        b.add(309);
+//        b.add(413);
+//        b.add(141);
+//        b.add(212);
+//        b.add(342);
+//        b.add(205);
+//        b.add(262);
+//        b.add(299);
+        //b.add(728);
+        Random r = new Random();
+        IOwork io = new IOwork();
+        IOwork badio= new IOwork();
+        Checker check = new Checker();
+        io.printerSetup("ISAOut.txt");
+        badio.printerSetup("ISABadOut.txt");
+        int inc=0;
+        while(true) {
+            b.clear();
+
+            for (int i = 0; i < 73; i++) {
+                b.add(r.nextInt(729));
+            }
+            ISA isa = new ISA(b);
+            System.out.println(inc);
+            inc++;
+            check.setBettingSystem(isa.bettingSystem);
+            check.checkSystem(null);
+            if(check.numUn<14&&check.numUn>0){
+                System.out.println("Less!");
+                io.writeToFile(isa, check.numUn);
+            }
+            else if(check.numUn==0) {
+                System.out.println("Solution!!!");
+                io.writeToFile(isa, check.numUn);
+                io.printerTeardown();
+                break;
+            }
+            else{
+                badio.writeToFile(isa, check.numUn);
+            }
+        }
     }
 }

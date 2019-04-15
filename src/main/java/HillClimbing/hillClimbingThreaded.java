@@ -20,7 +20,6 @@ public class hillClimbingThreaded {
             try {
                 future.get();
             } catch (Exception e) {
-                System.out.println("Normalizing edge weights interrupted or failed.");
                 e.printStackTrace();
                 System.exit(-1);
             }
